@@ -71,7 +71,7 @@ const About = () => {
         {/* Resume Download Button */}
         <div className="mt-16 text-center">
           <a
-            href="/resume.pdf"
+            href="resume.pdf"
             download
             className="inline-flex items-center gap-3 px-8 py-4 bg-glow text-midnight font-semibold rounded-full hover:bg-glow/90 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-glow/25"
           >

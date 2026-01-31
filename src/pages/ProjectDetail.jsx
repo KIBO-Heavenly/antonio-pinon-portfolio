@@ -154,7 +154,7 @@ const ProjectDetail = () => {
           <p className="text-white/60 mb-6">Interested in working together?</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a
-              href="/resume.pdf"
+              href="resume.pdf"
               download
               className="inline-flex items-center gap-2 px-6 py-3 bg-glow text-midnight font-semibold rounded-full hover:bg-glow/90 transition-all duration-300"
             >
