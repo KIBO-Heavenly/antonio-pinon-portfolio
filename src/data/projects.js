@@ -10,44 +10,44 @@ export const projects =
 
 Supports schedule conflict resolution, session history, and longitudinal progress tracking; includes CSV import/export and a simple admin UI, and has been used to manage dozens of weekly tutoring sessions.`,
     tags: ['C#', 'ASP.NET Core', 'React', 'Scheduling', 'Progress Tracking'],
-    logo: '/images/Athenor_LOGO.png', 
-    heroVideo: '/videos/Athenor-1.mp4', 
+    logo: 'images/Athenor_LOGO.png', 
+    heroVideo: 'videos/Athenor-1.mp4', 
     features: [
       {
         title: 'Import Data & Preview',
         description: 'Upload Excel/CSV files, preview rows instantly, sort and filter columns, and export cleaned results. Perfect for verifying potential tutor candidates for the growth of the tutoring services.',
         image: null,
-        video: '/videos/Athenor-4.mp4',
+        video: 'videos/Athenor-4.mp4',
       },
       {
         title: 'Upload Availability',
         description: 'Accept Excel uploads or manual entry to ingest tutors’ availability; the uploader groups schedules by tutor and supports saving or deleting tutor schedules.',
         image: null,
-        video: '/videos/Athenor-4.mp4',
+        video: 'videos/Athenor-4.mp4',
       },
       {
         title: 'Assign Tutors',
         description: 'Assign tutors to 30‑minute slots across sections (Math, Tutoring Commons, Writing) via click/drag; assignments show color-coded chips and live hour totals with warnings for overtime.',
         image: null,
-        video: '/videos/Athenor-4.mp4',
+        video: 'videos/Athenor-4.mp4',
       },
        {
         title: 'Adjust Calendar',
         description: 'Customize days and time‑slots, add/reorder slots with AM/PM validation, and save admin calendar preferences — includes undo/discard safeguards for unsaved changes.',
         image: null,
-        video: '/videos/Athenor-4.mp4',
+        video: 'videos/Athenor-4.mp4',
       },
        {
         title: 'Manage Users',
         description: 'Search, filter, and manage accounts with verification status and stats; protected accounts and a typed delete confirmation keep removals safe.',
         image: null,
-        video: '/videos/Athenor-4.mp4',
+        video: 'videos/Athenor-4.mp4',
       },
        {
         title: 'Reviews & Feedback',
         description: 'Public anonymous feedback — browse tutors, view profiles, and submit star ratings + comments; admin views aggregate reviews for quality monitoring.',
         image: null,
-        video: '/videos/Athenor-4.mp4',
+        video: 'videos/Athenor-4.mp4',
       },
        {
         title: 'Settings & Preferences',
@@ -68,7 +68,7 @@ Supports schedule conflict resolution, session history, and longitudinal progres
     tagline: '',
     description: '',
     tags: [],
-    logo: '/images/Wonder_Crayon_LOGO.jpg',
+    logo: 'images/Wonder_Crayon_LOGO.jpg',
     heroVideo: null,
     features: [
       {
