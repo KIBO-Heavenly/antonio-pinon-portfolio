@@ -43,6 +43,7 @@ const ProjectDetail = () => {
               src={project.logo}
               alt={project.name}
               className="mx-auto mb-8 block w-130 h-auto object-contain"
+              loading="lazy"
             />
           ) : (
             <div className="w-32 h-32 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-glow/30 to-purple-500/20 flex items-center justify-center animate-bounce-slow border border-glow/30">
@@ -154,8 +155,8 @@ const ProjectDetail = () => {
           <p className="text-white/60 mb-6">Interested in working together?</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a
-              href="resume.pdf"
-              download
+              href="/images/Computer_Science_Resume.pdf"
+              download="Antonio_Pinon_Resume.pdf"
               className="inline-flex items-center gap-2 px-6 py-3 bg-glow text-midnight font-semibold rounded-full hover:bg-glow/90 transition-all duration-300"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

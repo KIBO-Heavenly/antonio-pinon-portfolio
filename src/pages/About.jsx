@@ -71,8 +71,8 @@ const About = () => {
         {/* Resume Download Button */}
         <div className="mt-16 text-center">
           <a
-            href="resume.pdf"
-            download
+            href="/images/Computer_Science_Resume.pdf"
+            download="Antonio_Pinon_Resume.pdf"
             className="inline-flex items-center gap-3 px-8 py-4 bg-glow text-midnight font-semibold rounded-full hover:bg-glow/90 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-glow/25"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

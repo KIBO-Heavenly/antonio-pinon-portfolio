@@ -30,9 +30,10 @@ const FeatureSection = ({ feature, index }) => {
     <div 
       className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 md:gap-16 py-16`}
     >
-      {/* Media/Image Side */}
-      <div className="flex-1 w-full">
-        <div className="relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 aspect-video">
+      {/* Media/Image Side - give media more width on md+ screens so videos can be larger */}
+      <div className="w-full md:w-2/3">
+        {/* Video container - control size with max-w-* classes (max-w-md, max-w-lg, max-w-xl, max-w-2xl) */}
+            <div className="relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 aspect-video max-w-2xl mx-auto">
           {feature.video ? (
             <div ref={videoRef} className="w-full h-full">
               {isVideoLoaded ? (
@@ -56,6 +57,7 @@ const FeatureSection = ({ feature, index }) => {
               src={feature.image}
               alt={feature.title}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-glow/20 to-purple-500/10">
@@ -65,8 +67,8 @@ const FeatureSection = ({ feature, index }) => {
         </div>
       </div>
       
-      {/* Content Side */}
-      <div className="flex-1 w-full">
+      {/* Content Side - narrower on md+ screens to let media expand */}
+      <div className="w-full md:w-1/3">
         <h3 
           className="text-2xl md:text-3xl font-bold text-white mb-4"
           style={{ fontFamily: 'Unbounded, sans-serif' }}

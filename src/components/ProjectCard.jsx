@@ -12,6 +12,7 @@ const ProjectCard = ({ project }) => {
             src={project.logo}
             alt={project.name}
             className="inline-block max-w-full h-auto object-contain"
+            loading="lazy"
           />
         ) : (
           <div className="w-24 h-24 rounded-2xl bg-glow/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
