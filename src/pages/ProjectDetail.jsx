@@ -1,10 +1,42 @@
 import { useParams, Link } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import { getProjectBySlug } from '../data/projects';
 import FeatureSection from '../components/FeatureSection';
 
 const ProjectDetail = () => {
   const { slug } = useParams();
   const project = getProjectBySlug(slug);
+  const iframeRef = useRef(null);
+
+  useEffect(() => {
+    if (!iframeRef.current) return;
+
+    // Try to request HD playback via postMessage to the embedded player
+    const setQuality = () => {
+      try {
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'setPlaybackQuality', args: ['hd1080'] }),
+          '*'
+        );
+      } catch (e) {
+        // ignore
+      }
+    };
+
+    // Run after load and again after a short delay
+    const onLoad = () => {
+      setTimeout(setQuality, 300);
+      setQuality();
+    };
+
+    iframeRef.current.onload = onLoad;
+    // fallback: also try once after mount (player may be ready quickly)
+    setTimeout(setQuality, 800);
+
+    return () => {
+      if (iframeRef.current) iframeRef.current.onload = null;
+    };
+  }, [project.heroVideo]);
 
   if (!project) {
     return (
@@ -112,6 +144,35 @@ const ProjectDetail = () => {
         </div>
 
         {/* Hero Video/Image */}
+        {project.heroVideo && (
+          <div className="relative mb-16 aspect-video">
+            <div className="absolute inset-0 overflow-hidden">
+              <iframe
+                ref={iframeRef}
+                src={`https://www.youtube.com/embed/${project.heroVideo}?autoplay=1&mute=1&loop=1&playlist=${project.heroVideo}&controls=0&playsinline=1&iv_load_policy=3&modestbranding=1&rel=0&disablekb=1&enablejsapi=1&vq=hd1080`}
+                className="absolute"
+                style={{ top: '50%', left: '50%', width: '101%', height: '86%', transform: 'translate(-50%, -50%)', borderRadius: 14 }}
+                allow="autoplay; encrypted-media"
+                title={project.name}
+                frameBorder="0"
+              />
+
+              {/* Border overlay sized/positioned to match the cropped iframe */}
+              <div
+                aria-hidden="true"
+                className="absolute pointer-events-none rounded-2xl border border-glow/30"
+                style={{ top: '50%', left: '50%', width: '101%', height: '86%', transform: 'translate(-50%, -50%)' }}
+              />
+
+              {/* (removed top-cover overlay) */}
+            </div>
+
+            {/* Transparent overlay - blocks all YouTube controls */}
+            <div className="absolute inset-0 cursor-default" />
+          </div>
+        )}
+        
+        {/* Old hero video code removed, keeping as reference:
         {project.heroVideo && (
           <div className="mb-16 rounded-2xl overflow-hidden border border-white/10">
             <video
