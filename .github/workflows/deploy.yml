@@ -4,43 +4,45 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'docs/**'
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: write  # Allow the workflow to push commits
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Fetch all history for proper git operations
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Build site
         run: npm run build
-      
+
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-      
+
       - name: Commit and push if changes
         run: |
-          git add -f docs/
+          git add -f docs
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "chore: auto-deploy to docs/ [skip ci]"
+            git commit -m "chore: build site"
             git push origin main
           fi
