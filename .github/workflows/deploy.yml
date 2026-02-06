@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'docs/**'  # Don't trigger if only docs/ changed (prevents loop)
 
 jobs:
   build-and-deploy:
@@ -39,7 +37,7 @@ jobs:
       
       - name: Commit and push if changes
         run: |
-          git add docs/
+          git add -f docs/
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
