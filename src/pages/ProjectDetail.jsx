@@ -216,7 +216,7 @@ const ProjectDetail = () => {
           <p className="text-white/60 mb-6">Interested in working together?</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a
-              href="/images/Computer_Science_Resume.pdf"
+              href={`${import.meta.env.BASE_URL}images/Computer_Science_Resume.pdf`}
               download="Antonio_Pinon_Resume.pdf"
               className="inline-flex items-center gap-2 px-6 py-3 bg-glow text-midnight font-semibold rounded-full hover:bg-glow/90 transition-all duration-300"
             >
