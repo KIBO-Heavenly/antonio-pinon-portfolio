@@ -32,11 +32,6 @@ jobs:
       - name: Build site
         run: npm run build
       
-      - name: Copy dist to docs
-        run: |
-          rm -rf docs/*
-          cp -r dist/* docs/
-      
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
