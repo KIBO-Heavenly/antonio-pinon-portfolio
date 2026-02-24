@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import Dialog from '../components/Dialog';
 
-const Contact = () => {
+const Contact = () => 
+  {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -8,9 +10,26 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [dialog, setDialog] = useState({ open: false, title: '', message: '', variant: 'info' });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const friendlyErrorMessage = (raw) => {
+    if (!raw) return 'An unexpected error occurred.';
+    const lower = String(raw).toLowerCase();
+
+    if (lower.includes("form must include") || lower.includes('access_key') || lower.includes('form_id')) {
+      return `Missing API key: please add VITE_WEB3FORMS_KEY to your project's .env file and restart the dev server. If this is in production, set the environment variable on your host.`; 
+    }
+
+    if (lower.includes('unauthorized') || lower.includes('invalid') || lower.includes('401')) {
+      return `Unauthorized: your Web3Forms access key appears invalid. Verify VITE_WEB3FORMS_KEY and try again.`;
+    }
+
+    // fallback: return original message but keep it concise
+    return String(raw);
   };
 
   const handleSubmit = async (e) => {
@@ -34,16 +53,19 @@ const Contact = () => {
       });
 
       const result = await response.json();
-      
-      if (result.success) {
+      console.log('Web3Forms response status:', response.status, 'ok:', response.ok, 'body:', result);
+
+      if (response.ok && result.success) {
         setSubmitted(true);
         setFormData({ name: '', email: '', message: '' });
       } else {
-        alert('Failed to send message. Please try again or contact directly via email.');
+        const rawErr = result?.message || (result?.errors && JSON.stringify(result.errors)) || `HTTP ${response.status}`;
+        console.error('Form submission failed:', rawErr);
+        setDialog({ open: true, title: 'Failed to send message', message: friendlyErrorMessage(rawErr), variant: 'error' });
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      alert('Failed to send message. Please try again or contact directly via email.');
+      setDialog({ open: true, title: 'Submission error', message: friendlyErrorMessage(error?.message || error), variant: 'error' });
     } finally {
       setIsSubmitting(false);
     }
@@ -134,6 +156,15 @@ const Contact = () => {
             </button>
           </form>
         )}
+
+        <Dialog
+          open={dialog.open}
+          title={dialog.title}
+          variant={dialog.variant}
+          onClose={() => setDialog((d) => ({ ...d, open: false }))}
+        >
+          <p>{dialog.message}</p>
+        </Dialog>
 
         {/* Alternative Contact Methods */}
         <div className="mt-16 pt-12 border-t border-white/10">
