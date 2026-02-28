@@ -20,6 +20,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check Web3Forms secret
+        run: |
+          if [ -z "${{ secrets.VITE_WEB3FORMS_KEY }}" ]; then
+            echo "::error::VITE_WEB3FORMS_KEY is not set. Add it in Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+          echo "Web3Forms key is set (value not shown)."
+
       - name: Build (production)
         run: npm run build
         env:
