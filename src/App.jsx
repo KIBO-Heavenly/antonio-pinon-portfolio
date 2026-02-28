@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react';
 import Layout from './components/Layout';
 
 // Lazy load pages for code splitting - each page loads only when visited
+// Deployed via GitHub Actions (CI/CD)
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Projects = lazy(() => import('./pages/Projects'));

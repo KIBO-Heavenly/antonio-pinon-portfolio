@@ -16,7 +16,7 @@ const ProjectDetail = () => {
       try {
         iframeRef.current.contentWindow.postMessage(
           JSON.stringify({ event: 'command', func: 'setPlaybackQuality', args: ['hd1080'] }),
-          '*'
+          'https://www.youtube.com'
         );
       } catch (e) {
         // ignore

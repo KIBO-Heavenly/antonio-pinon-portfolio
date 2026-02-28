@@ -34,6 +34,9 @@ dist-ssr
 Thumbs.db
 .DS_Store
 
+# Build output (CI builds and deploys this; do not commit—can contain inlined env vars)
+docs/
+
 # Personal/sensitive files
 *.pem
 *.key

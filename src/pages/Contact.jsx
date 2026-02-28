@@ -53,18 +53,20 @@ const Contact = () =>
       });
 
       const result = await response.json();
-      console.log('Web3Forms response status:', response.status, 'ok:', response.ok, 'body:', result);
+      if (import.meta.env.DEV) {
+        console.log('Web3Forms response status:', response.status, 'ok:', response.ok, 'body:', result);
+      }
 
       if (response.ok && result.success) {
         setSubmitted(true);
         setFormData({ name: '', email: '', message: '' });
       } else {
         const rawErr = result?.message || (result?.errors && JSON.stringify(result.errors)) || `HTTP ${response.status}`;
-        console.error('Form submission failed:', rawErr);
+        if (import.meta.env.DEV) console.error('Form submission failed:', rawErr);
         setDialog({ open: true, title: 'Failed to send message', message: friendlyErrorMessage(rawErr), variant: 'error' });
       }
     } catch (error) {
-      console.error('Form submission error:', error);
+      if (import.meta.env.DEV) console.error('Form submission error:', error);
       setDialog({ open: true, title: 'Submission error', message: friendlyErrorMessage(error?.message || error), variant: 'error' });
     } finally {
       setIsSubmitting(false);

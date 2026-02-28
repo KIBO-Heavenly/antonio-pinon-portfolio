@@ -1,7 +1,0 @@
-# robots.txt - Instructions for search engine crawlers
-# Allow all bots to crawl the entire site
-User-agent: *
-Allow: /
-
-# Sitemap location (update with your actual domain)
-Sitemap: https://yoursite.com/sitemap.xml
